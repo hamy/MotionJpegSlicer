@@ -1,14 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<artifactId>Github-Master-POM</artifactId>
+		<groupId>Github-Master-POM</groupId>
+		<version>1.0.0</version>
+		<relativePath>../Github-Master-POM</relativePath>
+	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mjpegslicer</groupId>
 	<artifactId>mjpegslicer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MotionJpegSlicer</name>
+
 	<description>A library that slices Motion JPEG (M-JPEG) streams from a network camera into JPEG images</description>
+
 	<scm>
-		<connection>scm:git:git://github.com/hamy/MotionJpegSlicer.git</connection>
-		<developerConnection>scm:git:git://github.com/hamy/MotionJpegSlicer.git</developerConnection>
+		<connection>${hamy-scm-connection-base}/MotionJpegSlicer.git</connection>
+		<developerConnection>${hamy-scm-developer-connection-base}/MotionJpegSlicer.git</developerConnection>
+		<url>${hamy-scm-url-base}/MotionJpegSlicer</url>
 	</scm>
 
 	<build>
@@ -46,6 +57,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -78,9 +90,9 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins
-        </groupId>
+                </groupId>
 				<artifactId>maven-surefire-report-plugin
-        </artifactId>
+         </artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins

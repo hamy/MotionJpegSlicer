@@ -1,40 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  name="MotionJpegSlicer">
-  <bannerLeft>
-    <name>MotionJpegSlicer</name>
-    <!--
-    <src>images/logos/project-logo.png
-    </src> -->
-    <!--
-    <href>
-      http://${hamy_server_name}/Exercises/Java/Ex-Java-Bluetooth-Y2009/
-    </href> -->
-  </bannerLeft>
-   <publishDate
-    format="yyyy-MMMM-dd HH:mm:ss" />
-  <body>
+<project name="${project.name}">
 
-    <!-- breadcrumb nav -->
-    <links>
-      <item
-        name="Githup"
-        href="https://github.com/hamy/MotionJpegSlicer/" />
-      </links>
+	<bannerLeft>
+		<name>${project.name}</name>
+	</bannerLeft>
 
-    <!-- side bar menu -->
-    <menu
-      name="About">
-      <item
-        name="Home"
-        href="index.html" />
-      <item
-        name="History"
-        href="history.html" />
-     </menu>
+	<publishDate format="yyyy-MMMM-dd HH:mm:ss" />
 
- 
-    <!-- reports -->
-    ${reports}
-  </body>
+	<body>
+
+		<!-- breadcrumb nav -->
+		<links>
+			<item name="Githup" href="${project.scm.url}" />
+		</links>
+
+		<!-- side bar menu -->
+		<menu name="About">
+			<item name="Home" href="index.html" />
+			<item name="History" href="history.html" />
+		</menu>
+
+		<!-- reports -->
+		${reports}
+
+	</body>
+
 </project>

@@ -1,0 +1,15 @@
+/********************
+ * Local Stylesheet *
+ ********************
+ *
+ * Changes w.r.t maven-base.css: wider nav bar.
+ */
+
+#leftColumn {
+ width: 200px;
+ float:left;
+}
+#bodyColumn {
+  margin-right: 1.5em;
+  margin-left: 227px;
+}

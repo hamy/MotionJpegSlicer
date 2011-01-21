@@ -1,0 +1,7 @@
+MotionJpegSlicer is a small library for processing Motion JPEG image streams.
+
+The input stream (normally created by a network camera) is read and the images
+contained in this stream are extracted. Clients of this library register with
+the slicer and are notified by image events.
+
+The library also provides a mock camera that generates Motion JPEG image streams.

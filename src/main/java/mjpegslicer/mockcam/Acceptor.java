@@ -40,6 +40,13 @@ public class Acceptor extends LoggableObject implements Runnable {
 		String mn = debugEntering("shutdown");
 		running = false;
 		future.cancel(true);
+		if (serverSocket != null) {
+			try {
+				serverSocket.close();
+			} catch (Throwable ignored) {
+			}
+		}
+		serverSocket = null;
 		debugLeaving(mn);
 	}
 

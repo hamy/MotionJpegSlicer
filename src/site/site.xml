@@ -11,7 +11,7 @@
 
 		<!-- breadcrumb nav -->
 		<links>
-			<item name="Githup" href="${project.scm.url}" />
+			<item name="Githup" href="${hamy-scm-url-base}/MotionJpegSlicer" />
 		</links>
 
 		<!-- side bar menu -->

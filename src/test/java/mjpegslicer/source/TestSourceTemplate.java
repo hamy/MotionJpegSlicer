@@ -228,6 +228,7 @@ public class TestSourceTemplate extends AbstractTestCase {
 			template.setPort(Camera.DEFAULT_PORT);
 			template.startStream();
 			Thread.sleep(2000);
+			template.stopStream();
 		} catch (Throwable ta) {
 			fail("exception: " + ta);
 		} finally {

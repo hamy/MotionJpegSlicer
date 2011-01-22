@@ -5,8 +5,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import mjpegslicer.ImageDataCorruptionException;
 import mjpegslicer.LoggableObject;
@@ -51,6 +56,8 @@ public class SinkTemplate extends LoggableObject implements Sink {
 		Validator.checkState(mn, !started, "Sink is already started.");
 		started = true;
 		this.inputStream = new BufferedInputStream(inputStream, 8192);
+		runner = new Runner(this);
+		debug(mn, "runner created: ", runner);
 		debugLeaving(mn);
 	}
 
@@ -67,6 +74,10 @@ public class SinkTemplate extends LoggableObject implements Sink {
 			} finally {
 				inputStream = null;
 			}
+		}
+		if (runner != null) {
+			runner.shutdown();
+			runner = null;
 		}
 		started = false;
 		debugLeaving(mn);
@@ -216,5 +227,74 @@ public class SinkTemplate extends LoggableObject implements Sink {
 	 */
 	public int getImageCount() {
 		return imageCount.get();
+	}
+
+	private Runner runner = null;
+
+	private static class Runner extends LoggableObject implements Runnable {
+		private boolean running = false;
+		private Future<?> future;
+		private Sink sink;
+		private Pattern pattern;
+
+		private Runner(Sink sink) {
+			debugEntering(MN_INIT);
+			this.sink = sink;
+			pattern = Pattern.compile(REGEX_PATTERN, REGEX_FLAGS);
+			ExecutorService pool = Executors.newSingleThreadExecutor();
+			running = true;
+			future = pool.submit(this);
+			debugLeaving(MN_INIT);
+		}
+
+		private void shutdown() {
+			String mn = debugEntering("shutdown");
+			if (future != null) {
+				future.cancel(true);
+				future = null;
+			}
+			running = false;
+			debugLeaving(mn);
+		}
+
+		private static final String REGEX_PATTERN = "content-length:\\s+(\\d+)";
+		private static final int REGEX_FLAGS = Pattern.CASE_INSENSITIVE;
+
+		private int extractContentLength(String[] headers) {
+			String mn = debugEntering("extractContentLength");
+			int result = -1;
+			for (String header : headers) {
+				if (result != -1) {
+					break;
+				}
+				Matcher m = pattern.matcher(header);
+				if (m.matches()) {
+					result = Integer.parseInt(m.group(1));
+				}
+			}
+			debugLeaving(mn, "result: ", result);
+			return result;
+		}
+
+		public void run() {
+			String mn = debugEntering("run");
+			debug(mn, "reading first HTTP header...");
+			String[] headers = sink.readHttpHeader();
+			while (running) {
+				headers = sink.readHttpHeader();
+				if (headers == null) {
+					warn(mn, "found EOD.");
+					running = false;
+				} else {
+					int contentLength = extractContentLength(headers);
+					byte[] imageData = sink.readImageData(contentLength);
+					if (imageData == null) {
+						warn(mn, "found EOD.");
+						running = false;
+					}
+				}
+			}
+			debugLeaving(mn);
+		}
 	}
 }

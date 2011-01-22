@@ -9,10 +9,11 @@ public class AssertSource {
 	private AssertSource() {
 	}
 
-	public static void assertCamera(String expectedHostName, int expectedPort,
+	public static void assertSource(String expectedHostName, int expectedPort,
 			String expectedPath, String expectedUserName,
 			String expectedPassword, boolean expectedIsStarted,
 			long expectedByteCount, Source actual) {
+		assertNotNull("actual source reference must not be null.", actual);
 		assertNotNull("expected host name must not be null.", expectedHostName);
 		assertEquals("host name mismatch:", expectedHostName,
 				actual.getHostName());

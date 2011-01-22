@@ -1,6 +1,6 @@
 package mjpegslicer.source;
 
-import static mjpegslicer.source.AssertSource.assertCamera;
+import static mjpegslicer.source.AssertSource.assertSource;
 import static org.junit.Assert.fail;
 
 import org.junit.After;
@@ -36,7 +36,7 @@ public class TestSourceTemplate extends AbstractTestCase {
 	@Test
 	public void testSetUp() {
 		String mn = debugEntering("testSetUp");
-		assertCamera(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
+		assertSource(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
 				Source.DEFAULT_PATH, Source.DEFAULT_USER_NAME,
 				Source.DEFAULT_PASSWORD, false, 0, template);
 		debugLeaving(mn);
@@ -47,7 +47,7 @@ public class TestSourceTemplate extends AbstractTestCase {
 		String mn = debugEntering("testValidHostName");
 		String newHostName = "foo.bar.com";
 		template.setHostName(newHostName);
-		assertCamera(newHostName, Source.DEFAULT_PORT, Source.DEFAULT_PATH,
+		assertSource(newHostName, Source.DEFAULT_PORT, Source.DEFAULT_PATH,
 				Source.DEFAULT_USER_NAME, Source.DEFAULT_PASSWORD, false, 0,
 				template);
 		debugLeaving(mn);
@@ -88,17 +88,17 @@ public class TestSourceTemplate extends AbstractTestCase {
 		String mn = debugEntering("testValidPort");
 		int newPort = 8080;
 		template.setPort(newPort);
-		assertCamera(Source.DEFAULT_HOST_NAME, newPort, Source.DEFAULT_PATH,
+		assertSource(Source.DEFAULT_HOST_NAME, newPort, Source.DEFAULT_PATH,
 				Source.DEFAULT_USER_NAME, Source.DEFAULT_PASSWORD, false, 0,
 				template);
 		newPort = 1;
 		template.setPort(newPort);
-		assertCamera(Source.DEFAULT_HOST_NAME, newPort, Source.DEFAULT_PATH,
+		assertSource(Source.DEFAULT_HOST_NAME, newPort, Source.DEFAULT_PATH,
 				Source.DEFAULT_USER_NAME, Source.DEFAULT_PASSWORD, false, 0,
 				template);
 		newPort = 65535;
 		template.setPort(newPort);
-		assertCamera(Source.DEFAULT_HOST_NAME, newPort, Source.DEFAULT_PATH,
+		assertSource(Source.DEFAULT_HOST_NAME, newPort, Source.DEFAULT_PATH,
 				Source.DEFAULT_USER_NAME, Source.DEFAULT_PASSWORD, false, 0,
 				template);
 		debugLeaving(mn);
@@ -139,7 +139,7 @@ public class TestSourceTemplate extends AbstractTestCase {
 		String mn = debugEntering("testValidPath");
 		String newPath = "/foo/bar";
 		template.setPath(newPath);
-		assertCamera(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT, newPath,
+		assertSource(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT, newPath,
 				Source.DEFAULT_USER_NAME, Source.DEFAULT_PASSWORD, false, 0,
 				template);
 		debugLeaving(mn);
@@ -180,7 +180,7 @@ public class TestSourceTemplate extends AbstractTestCase {
 		String mn = debugEntering("testValidUserName");
 		String newUserName = "jane.doe";
 		template.setUserName(newUserName);
-		assertCamera(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
+		assertSource(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
 				Source.DEFAULT_PATH, newUserName, Source.DEFAULT_PASSWORD,
 				false, 0, template);
 		debugLeaving(mn);
@@ -190,7 +190,7 @@ public class TestSourceTemplate extends AbstractTestCase {
 	public void testNullUserName() {
 		String mn = debugEntering("testNullUserName");
 		template.setUserName(null);
-		assertCamera(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
+		assertSource(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
 				Source.DEFAULT_PATH, null, Source.DEFAULT_PASSWORD, false, 0,
 				template);
 		debugLeaving(mn);
@@ -201,7 +201,7 @@ public class TestSourceTemplate extends AbstractTestCase {
 		String mn = debugEntering("testValidPassword");
 		String newPassword = "secret";
 		template.setPassword(newPassword);
-		assertCamera(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
+		assertSource(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
 				Source.DEFAULT_PATH, Source.DEFAULT_USER_NAME, newPassword,
 				false, 0, template);
 		debugLeaving(mn);
@@ -211,7 +211,7 @@ public class TestSourceTemplate extends AbstractTestCase {
 	public void testNullPassword() {
 		String mn = debugEntering("testNullPassword");
 		template.setPassword(null);
-		assertCamera(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
+		assertSource(Source.DEFAULT_HOST_NAME, Source.DEFAULT_PORT,
 				Source.DEFAULT_PATH, Source.DEFAULT_USER_NAME, null, false, 0,
 				template);
 		debugLeaving(mn);

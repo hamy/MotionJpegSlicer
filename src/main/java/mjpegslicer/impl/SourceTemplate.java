@@ -4,9 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
 
 import mjpegslicer.Source;
@@ -353,56 +350,5 @@ public class SourceTemplate extends LoggableObject implements Source {
 		cleanUp();
 		started = false;
 		debugLeaving(mn);
-	}
-
-	/**
-	 * runner,start,stop must be extracted to top-level class "Slicer"
-	 */
-
-	/**
-	 * Starts the event processing.
-	 */
-	public void start() {
-		String mn = debugEntering("start");
-		runner = new Runner();
-		debugLeaving(mn);
-	}
-
-	/**
-	 * Stops the event processing.
-	 */
-	public void stop() {
-		String mn = debugEntering("start");
-		runner.shutdown();
-		debugLeaving(mn);
-	}
-
-	private Runner runner = null;
-
-	private static class Runner extends LoggableObject implements Runnable {
-		private boolean running = false;
-		private Future<?> future;
-
-		private Runner() {
-			debugEntering(MN_INIT);
-			ExecutorService pool = Executors.newSingleThreadExecutor();
-			running = true;
-			future = pool.submit(this);
-			debugLeaving(MN_INIT);
-		}
-
-		private void shutdown() {
-			String mn = debugEntering("shutdown");
-			if (future != null) {
-				future.cancel(true);
-				future = null;
-			}
-			debugLeaving(mn);
-		}
-
-		public void run() {
-			String mn = debugEntering("run");
-			debugLeaving(mn);
-		}
 	}
 }

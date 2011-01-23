@@ -57,27 +57,4 @@ public abstract class AbstractTestCase extends LoggableObject {
 	public void failedToThrowExpectedException(String methodName) {
 		fail("Failed to throw expected exception in method " + methodName);
 	}
-
-	/**
-	 * Waits for a certain amount of time.
-	 * 
-	 * @param millis
-	 *            The delay in milliseconds.
-	 */
-	public static void sleepMillis(long millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException ignored) {
-		}
-	}
-
-	/**
-	 * Waits for a certain amount of time.
-	 * 
-	 * @param seconds
-	 *            The delay in seconds.
-	 */
-	public static void sleepSeconds(long seconds) {
-		sleepMillis(1000L * seconds);
-	}
 }

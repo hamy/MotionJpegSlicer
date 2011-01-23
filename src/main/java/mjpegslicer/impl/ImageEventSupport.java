@@ -16,11 +16,11 @@ public class ImageEventSupport extends LoggableObject implements ImageListener {
 	private List<ImageListener> listeners = new ArrayList<ImageListener>();
 
 	/**
-	 * Returns the number of JPEG listeners.
+	 * Returns the number of image listeners.
 	 * 
 	 * @return The number.
 	 */
-	public int countJpegListeners() {
+	public int countImageListeners() {
 		return listeners.size();
 	}
 
@@ -34,12 +34,12 @@ public class ImageEventSupport extends LoggableObject implements ImageListener {
 	}
 
 	/**
-	 * Adds a JPEG listener.
+	 * Adds an image listener.
 	 * 
 	 * @param listener
 	 *            The listener that is added.
 	 */
-	public void addJpegListener(ImageListener listener) {
+	public void addImageListener(ImageListener listener) {
 		String mn = debugEntering("addJpegListener", "listener: ", listener);
 		if (listener == null) {
 			warn(mn, "Listener reference null is ignored.");
@@ -52,12 +52,12 @@ public class ImageEventSupport extends LoggableObject implements ImageListener {
 	}
 
 	/**
-	 * Removes a JPEG listener.
+	 * Removes an image listener.
 	 * 
 	 * @param listener
 	 *            The listener that is removed.
 	 */
-	public void removeJpegListener(ImageListener listener) {
+	public void removeImageListener(ImageListener listener) {
 		String mn = debugEntering("removeJpegListener", "listener: ", listener);
 		if (listener == null) {
 			warn(mn, "Listener reference null is ignored.");
@@ -70,7 +70,7 @@ public class ImageEventSupport extends LoggableObject implements ImageListener {
 	}
 
 	/**
-	 * The JPEG listener implementation: distribute events to all registered
+	 * The image listener implementation: distribute events to all registered
 	 * listeners.
 	 * 
 	 * @param event

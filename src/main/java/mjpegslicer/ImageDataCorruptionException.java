@@ -1,7 +1,7 @@
 package mjpegslicer;
 
 /**
- * This exception is thrown when corrupted JPEG images from an M-JPEG stream are
+ * This exception is thrown when corrupted images from an M-JPEG stream are
  * processed.
  */
 public class ImageDataCorruptionException extends RuntimeException {

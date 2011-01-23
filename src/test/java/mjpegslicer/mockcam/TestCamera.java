@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import mjpegslicer.AbstractTestCase;
+import mjpegslicer.util.Sleep;
 
 public class TestCamera extends AbstractTestCase {
 
@@ -39,7 +40,7 @@ public class TestCamera extends AbstractTestCase {
 	public void testDryRun() throws Exception {
 		String mn = debugEntering("testDryRun");
 		camera.start();
-		Thread.sleep(1999);camera.stop();
+		Sleep.sleepMillis(1999);camera.stop();
 		debugLeaving(mn);
 	}
 

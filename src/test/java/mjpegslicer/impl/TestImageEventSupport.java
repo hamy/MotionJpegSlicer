@@ -48,7 +48,7 @@ public class TestImageEventSupport extends AbstractTestCase {
 		String mn = debugEntering("testSetUp");
 		assertNotNull(event);
 		assertNotNull(support);
-		assertEquals(0, support.countJpegListeners());
+		assertEquals(0, support.countImageListeners());
 		assertNotNull(listener1);
 		assertEquals(0, listener1.count);
 		assertNotNull(listener2);
@@ -59,82 +59,82 @@ public class TestImageEventSupport extends AbstractTestCase {
 	@Test
 	public void testAddValidListeners() {
 		String mn = debugEntering("testAddValidListeners");
-		assertEquals(0, support.countJpegListeners());
-		support.addJpegListener(listener1);
-		assertEquals(1, support.countJpegListeners());
-		support.addJpegListener(listener2);
-		assertEquals(2, support.countJpegListeners());
+		assertEquals(0, support.countImageListeners());
+		support.addImageListener(listener1);
+		assertEquals(1, support.countImageListeners());
+		support.addImageListener(listener2);
+		assertEquals(2, support.countImageListeners());
 		debugLeaving(mn);
 	}
 
 	@Test
 	public void testRemoveValidListeners() {
 		String mn = debugEntering("testRemoveValidListeners");
-		support.addJpegListener(listener1);
-		support.addJpegListener(listener2);
-		assertEquals(2, support.countJpegListeners());
-		support.removeJpegListener(listener1);
-		assertEquals(1, support.countJpegListeners());
-		support.removeJpegListener(listener2);
-		assertEquals(0, support.countJpegListeners());
+		support.addImageListener(listener1);
+		support.addImageListener(listener2);
+		assertEquals(2, support.countImageListeners());
+		support.removeImageListener(listener1);
+		assertEquals(1, support.countImageListeners());
+		support.removeImageListener(listener2);
+		assertEquals(0, support.countImageListeners());
 		debugLeaving(mn);
 	}
 
 	@Test
 	public void testAddNullListeners() {
 		String mn = debugEntering("testAddNullListeners");
-		assertEquals(0, support.countJpegListeners());
-		support.addJpegListener(null);
-		assertEquals(0, support.countJpegListeners());
-		support.addJpegListener(listener1);
-		assertEquals(1, support.countJpegListeners());
-		support.addJpegListener(null);
-		assertEquals(1, support.countJpegListeners());
+		assertEquals(0, support.countImageListeners());
+		support.addImageListener(null);
+		assertEquals(0, support.countImageListeners());
+		support.addImageListener(listener1);
+		assertEquals(1, support.countImageListeners());
+		support.addImageListener(null);
+		assertEquals(1, support.countImageListeners());
 		debugLeaving(mn);
 	}
 
 	@Test
 	public void testRemoveNullListeners() {
 		String mn = debugEntering("testRemoveNullListeners");
-		assertEquals(0, support.countJpegListeners());
-		support.removeJpegListener(null);
-		assertEquals(0, support.countJpegListeners());
-		support.addJpegListener(listener1);
-		assertEquals(1, support.countJpegListeners());
-		support.removeJpegListener(null);
-		assertEquals(1, support.countJpegListeners());
+		assertEquals(0, support.countImageListeners());
+		support.removeImageListener(null);
+		assertEquals(0, support.countImageListeners());
+		support.addImageListener(listener1);
+		assertEquals(1, support.countImageListeners());
+		support.removeImageListener(null);
+		assertEquals(1, support.countImageListeners());
 		debugLeaving(mn);
 	}
 
 	@Test
 	public void testAddSameListenerTwice() {
 		String mn = debugEntering("testAddSameListenerTwice");
-		assertEquals(0, support.countJpegListeners());
-		support.addJpegListener(listener1);
-		assertEquals(1, support.countJpegListeners());
-		support.addJpegListener(listener1);
-		assertEquals(1, support.countJpegListeners());
-		support.addJpegListener(listener2);
-		assertEquals(2, support.countJpegListeners());
-		support.addJpegListener(listener2);
-		assertEquals(2, support.countJpegListeners());
+		assertEquals(0, support.countImageListeners());
+		support.addImageListener(listener1);
+		assertEquals(1, support.countImageListeners());
+		support.addImageListener(listener1);
+		assertEquals(1, support.countImageListeners());
+		support.addImageListener(listener2);
+		assertEquals(2, support.countImageListeners());
+		support.addImageListener(listener2);
+		assertEquals(2, support.countImageListeners());
 		debugLeaving(mn);
 	}
 
 	@Test
 	public void testRemoveSameListenerTwice() {
 		String mn = debugEntering("testRemoveSameListenerTwice");
-		support.addJpegListener(listener1);
-		support.addJpegListener(listener2);
-		assertEquals(2, support.countJpegListeners());
-		support.removeJpegListener(listener1);
-		assertEquals(1, support.countJpegListeners());
-		support.removeJpegListener(listener1);
-		assertEquals(1, support.countJpegListeners());
-		support.removeJpegListener(listener2);
-		assertEquals(0, support.countJpegListeners());
-		support.removeJpegListener(listener2);
-		assertEquals(0, support.countJpegListeners());
+		support.addImageListener(listener1);
+		support.addImageListener(listener2);
+		assertEquals(2, support.countImageListeners());
+		support.removeImageListener(listener1);
+		assertEquals(1, support.countImageListeners());
+		support.removeImageListener(listener1);
+		assertEquals(1, support.countImageListeners());
+		support.removeImageListener(listener2);
+		assertEquals(0, support.countImageListeners());
+		support.removeImageListener(listener2);
+		assertEquals(0, support.countImageListeners());
 		debugLeaving(mn);
 	}
 
@@ -147,19 +147,19 @@ public class TestImageEventSupport extends AbstractTestCase {
 		support.newImage(event);
 		assertEquals(0, listener1.count);
 		assertEquals(0, listener2.count);
-		support.addJpegListener(listener1);
+		support.addImageListener(listener1);
 		support.newImage(event);
 		assertEquals(1, listener1.count);
 		assertEquals(0, listener2.count);
-		support.addJpegListener(listener2);
+		support.addImageListener(listener2);
 		support.newImage(event);
 		assertEquals(2, listener1.count);
 		assertEquals(1, listener2.count);
-		support.removeJpegListener(listener2);
+		support.removeImageListener(listener2);
 		support.newImage(event);
 		assertEquals(3, listener1.count);
 		assertEquals(1, listener2.count);
-		support.removeJpegListener(listener1);
+		support.removeImageListener(listener1);
 		support.newImage(event);
 		assertEquals(3, listener1.count);
 		assertEquals(1, listener2.count);

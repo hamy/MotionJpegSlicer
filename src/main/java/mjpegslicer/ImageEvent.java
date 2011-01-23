@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 
 /**
- * This class describes a JPEG image that was sliced from the M-JPEG stream.
+ * This class describes an image that was sliced from the M-JPEG stream.
  */
 public class ImageEvent extends EventObject {
 

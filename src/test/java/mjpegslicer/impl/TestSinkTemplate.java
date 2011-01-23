@@ -13,6 +13,7 @@ import org.junit.Test;
 import mjpegslicer.AbstractTestCase;
 import mjpegslicer.Sink;
 import mjpegslicer.impl.SinkTemplate;
+import mjpegslicer.util.Sleep;
 
 public class TestSinkTemplate extends AbstractTestCase {
 
@@ -34,7 +35,7 @@ public class TestSinkTemplate extends AbstractTestCase {
 		posLine("Cache-Control: no-cache");
 		posLine("Content-Type: multipart/x-mixed-replace; boundary=myboundary");
 		posLine("");
-		sleepMillis(500);
+		Sleep.sleepMillis(500);
 	}
 
 	private void posImage() throws Exception {
@@ -43,7 +44,7 @@ public class TestSinkTemplate extends AbstractTestCase {
 		posLine("Content-Length: 10");
 		posLine("");
 		posLine("0123456789"); // 10 bytes pseudo-JPEG data and CRLF
-		sleepMillis(500);
+		Sleep.sleepMillis(500);
 	}
 
 	@Before
@@ -107,7 +108,7 @@ public class TestSinkTemplate extends AbstractTestCase {
 		String mn = debugEntering("testStartAndStop");
 		template.startStream(pis);
 		assertSink(true, 0, 0, 0, template);
-		sleepMillis(500);
+		Sleep.sleepMillis(500);
 		template.stopStream();
 		assertSink(false, 0, 0, 0, template);
 		debugLeaving(mn);
@@ -118,7 +119,7 @@ public class TestSinkTemplate extends AbstractTestCase {
 		String mn = debugEntering("testStartAndMultipleStop");
 		template.startStream(pis);
 		assertSink(true, 0, 0, 0, template);
-		sleepMillis(500);
+		Sleep.sleepMillis(500);
 		template.stopStream();
 		assertSink(false, 0, 0, 0, template);
 		try {

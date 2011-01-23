@@ -5,7 +5,6 @@
 		<artifactId>Github-Master-POM</artifactId>
 		<groupId>Github-Master-POM</groupId>
 		<version>1.0.0</version>
-		<relativePath>../Github-Master-POM</relativePath> 
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -17,46 +16,10 @@
 	<description>A library that slices Motion JPEG (M-JPEG) streams from a network camera into JPEG images</description>
 
 	<scm>
-		<connection>${hamy-scm-connection-base}/MotionJpegSlicer.git</connection>
-		<developerConnection>${hamy-scm-developer-connection-base}/MotionJpegSlicer.git</developerConnection>
-		<url>${hamy-scm-url-base}/MotionJpegSlicer</url>
+		<connection>${hamyScmConnectionBase}/MotionJpegSlicer.git</connection>
+		<developerConnection>${hamyScmDeveloperConnectionBase}/MotionJpegSlicer.git</developerConnection>
+		<url>${hamyScmUrlBase}/MotionJpegSlicer</url>
 	</scm>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<systemProperties>
-						<property>
-							<name>log4j.configuration</name>
-							<value>log4j-for-unit-tests.xml</value>
-						</property>
-					</systemProperties>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-scm-plugin</artifactId>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.scm</groupId>
-						<artifactId>maven-scm-provider-gitexe</artifactId>
-						<version>1.4</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-		</plugins>
-	</build>
 
 	<dependencies>
 		<dependency>
@@ -74,30 +37,39 @@
 		</dependency>
 	</dependencies>
 
-	<reporting>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId><version>2.2</version>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
-					<inputEncoding>UTF-8</inputEncoding>
-					<outputEncoding>UTF-8</outputEncoding>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-changelog-plugin</artifactId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.7.1</version>
+				<configuration>
+					<systemProperties>
+						<property>
+							<name>log4j.configuration</name>
+							<value>log4j-for-unit-tests.xml</value>
+						</property>
+					</systemProperties>
+				</configuration>
 			</plugin>
+		</plugins>
+	</build>
+
+	<reporting>
+		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins
-                </groupId>
-				<artifactId>maven-surefire-report-plugin
-         </artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins
-        </groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.7.1</version>
 			</plugin>
 		</plugins>
 	</reporting>

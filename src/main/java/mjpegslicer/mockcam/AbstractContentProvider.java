@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import mjpegslicer.LoggableObject;
+import mjpegslicer.util.LoggableObject;
 
 /**
  * This is the base class for content providers.

@@ -1,7 +1,10 @@
-package mjpegslicer;
+package mjpegslicer.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
+import mjpegslicer.AbstractTestCase;
+import mjpegslicer.util.LoggableObject;
 
 import org.junit.Before;
 import org.junit.Test;

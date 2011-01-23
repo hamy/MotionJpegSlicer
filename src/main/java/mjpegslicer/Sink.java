@@ -1,4 +1,4 @@
-package mjpegslicer.sink;
+package mjpegslicer;
 
 import java.io.InputStream;
 

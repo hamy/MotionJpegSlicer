@@ -1,4 +1,4 @@
-package mjpegslicer.event;
+package mjpegslicer;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -9,12 +9,11 @@ import java.util.EventObject;
 
 import javax.imageio.ImageIO;
 
-import mjpegslicer.ImageDataCorruptionException;
 
 /**
  * This class describes a JPEG image that was sliced from the M-JPEG stream.
  */
-public class JpegEvent extends EventObject {
+public class ImageEvent extends EventObject {
 
 	private static final long serialVersionUID = -1L;
 	
@@ -92,7 +91,7 @@ public class JpegEvent extends EventObject {
 	 * @throws ImageDataCorruptionException
 	 *             if an invalid byte array was specified.
 	 */
-	public JpegEvent(Object source, long creationMillis, int sequenceNumber,
+	public ImageEvent(Object source, long creationMillis, int sequenceNumber,
 			byte[] imageData) {
 		super(source);
 		if (imageData == null) {
@@ -143,7 +142,7 @@ public class JpegEvent extends EventObject {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("JpegEvent[src=");
+		StringBuilder sb = new StringBuilder("ImageEvent[src=");
 		sb.append(source.hashCode());
 		sb.append(",created=");
 		sb.append(creationMillis);

@@ -14,8 +14,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.imageio.ImageIO;
 
 import mjpegslicer.ImageDataCorruptionException;
-import mjpegslicer.LoggableObject;
-import mjpegslicer.Validator;
+import mjpegslicer.util.LoggableObject;
+import mjpegslicer.util.Validator;
 
 public class FeederTemplate extends LoggableObject implements Feeder {
 

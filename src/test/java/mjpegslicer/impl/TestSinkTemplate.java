@@ -1,6 +1,6 @@
-package mjpegslicer.sink;
+package mjpegslicer.impl;
 
-import static mjpegslicer.sink.AssertSink.assertSink;
+import static mjpegslicer.AssertSink.assertSink;
 import static org.junit.Assert.assertTrue;
 
 import java.io.PipedInputStream;
@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import mjpegslicer.AbstractTestCase;
-import mjpegslicer.sink.Sink;
-import mjpegslicer.sink.SinkTemplate;
+import mjpegslicer.Sink;
+import mjpegslicer.impl.SinkTemplate;
 
 public class TestSinkTemplate extends AbstractTestCase {
 

@@ -1,7 +1,8 @@
-package mjpegslicer.source;
+package mjpegslicer;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import mjpegslicer.Source;
 
 public class AssertSource {
 

@@ -1,4 +1,4 @@
-package mjpegslicer.event;
+package mjpegslicer.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -9,11 +9,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
 import mjpegslicer.AbstractTestCase;
+import mjpegslicer.ImageEvent;
+import mjpegslicer.ImageListener;
+import mjpegslicer.impl.ImageEventSupport;
 
-public class TestJpegEventSupport extends AbstractTestCase {
+public class TestImageEventSupport extends AbstractTestCase {
 
-	private JpegEvent event;
-	private JpegEventSupport support;
+	private ImageEvent event;
+	private ImageEventSupport support;
 	private MyListener listener1, listener2;
 
 	@Before
@@ -31,9 +34,9 @@ public class TestJpegEventSupport extends AbstractTestCase {
 		baos.flush();
 		byte[] data = baos.toByteArray();
 		baos.close();
-		event = new JpegEvent(this, System.currentTimeMillis(), 123, data);
+		event = new ImageEvent(this, System.currentTimeMillis(), 123, data);
 		debug(mn, "event: ", event);
-		support = new JpegEventSupport();
+		support = new ImageEventSupport();
 		debug(mn, "support: ", support);
 		listener1 = new MyListener();
 		listener2 = new MyListener();
@@ -163,12 +166,12 @@ public class TestJpegEventSupport extends AbstractTestCase {
 		debugLeaving(mn);
 	}
 
-	private class MyListener implements JpegListener {
+	private class MyListener implements ImageListener {
 
 		private int count;
 
 		@Override
-		public void newImage(JpegEvent event) {
+		public void newImage(ImageEvent event) {
 			count++;
 		}
 	}

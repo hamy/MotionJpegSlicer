@@ -1,4 +1,4 @@
-package mjpegslicer.event;
+package mjpegslicer;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -8,18 +8,18 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
-import static mjpegslicer.event.AssertEvent.assertJpegEvent;
+import static mjpegslicer.AssertImageEvent.assertImageEvent;
 
-import mjpegslicer.AbstractTestCase;
 import mjpegslicer.ImageDataCorruptionException;
+import mjpegslicer.ImageEvent;
 
-public class TestJpegEvent extends AbstractTestCase {
+public class TestImageEvent extends AbstractTestCase {
 
 	private Object setUpSource;
 	private long setUpCreationMillis;
 	private int setUpSequenceNumber;
 	private byte[] setUpImageData;
-	private JpegEvent setUpEvent;
+	private ImageEvent setUpEvent;
 
 	private void setUpReadImageData(String suffix) throws Exception {
 		String mn = debugEntering("readImageData", "suffix: ", suffix);
@@ -45,7 +45,7 @@ public class TestJpegEvent extends AbstractTestCase {
 		setUpCreationMillis = System.currentTimeMillis();
 		setUpSequenceNumber = 123;
 		setUpReadImageData(".jpg");
-		setUpEvent = new JpegEvent(setUpSource, setUpCreationMillis,
+		setUpEvent = new ImageEvent(setUpSource, setUpCreationMillis,
 				setUpSequenceNumber, setUpImageData);
 		debugLeaving(mn, "event: ", setUpEvent);
 	}
@@ -53,7 +53,7 @@ public class TestJpegEvent extends AbstractTestCase {
 	@Test
 	public void testSetUp() {
 		String mn = debugEntering("testSetUp");
-		assertJpegEvent(setUpSource, setUpCreationMillis, setUpSequenceNumber,
+		assertImageEvent(setUpSource, setUpCreationMillis, setUpSequenceNumber,
 				setUpImageData, setUpEvent);
 		debugLeaving(mn);
 	}
@@ -73,7 +73,7 @@ public class TestJpegEvent extends AbstractTestCase {
 	public void testConstructorWithNullImageData() {
 		String mn = debugEntering("testConstructorWithNullImageData");
 		try {
-			setUpEvent = new JpegEvent(setUpSource, setUpCreationMillis,
+			setUpEvent = new ImageEvent(setUpSource, setUpCreationMillis,
 					setUpSequenceNumber, null);
 			failedToThrowExpectedException(mn);
 		} catch (ImageDataCorruptionException idce) {
@@ -87,7 +87,7 @@ public class TestJpegEvent extends AbstractTestCase {
 		String mn = debugEntering("testConstructorWithEmptyImageData");
 		setUpReadImageData("-no-data.jpg");
 		try {
-			setUpEvent = new JpegEvent(setUpSource, setUpCreationMillis,
+			setUpEvent = new ImageEvent(setUpSource, setUpCreationMillis,
 					setUpSequenceNumber, setUpImageData);
 			failedToThrowExpectedException(mn);
 		} catch (ImageDataCorruptionException idce) {
@@ -100,7 +100,7 @@ public class TestJpegEvent extends AbstractTestCase {
 	public void testImageCreationWithCorruptedImageData() throws Exception {
 		String mn = debugEntering("testImageCreationWithCorruptedImageData");
 		setUpReadImageData("-corrupted-data.jpg");
-		setUpEvent = new JpegEvent(setUpSource, setUpCreationMillis,
+		setUpEvent = new ImageEvent(setUpSource, setUpCreationMillis,
 				setUpSequenceNumber, setUpImageData);
 		try {
 			setUpEvent.createBufferedImage();

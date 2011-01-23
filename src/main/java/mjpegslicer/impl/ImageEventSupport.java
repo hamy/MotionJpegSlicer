@@ -1,17 +1,19 @@
-package mjpegslicer.event;
+package mjpegslicer.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import mjpegslicer.LoggableObject;
+import mjpegslicer.ImageEvent;
+import mjpegslicer.ImageListener;
+import mjpegslicer.util.LoggableObject;
 
 /**
- * This is a support class that eases the distribution of {@link JpegEvent}
- * instances to {@link JpegListener} instances.
+ * This is a support class that eases the distribution of {@link ImageEvent}
+ * instances to {@link ImageListener} instances.
  */
-public class JpegEventSupport extends LoggableObject implements JpegListener {
+public class ImageEventSupport extends LoggableObject implements ImageListener {
 
-	private List<JpegListener> listeners = new ArrayList<JpegListener>();
+	private List<ImageListener> listeners = new ArrayList<ImageListener>();
 
 	/**
 	 * Returns the number of JPEG listeners.
@@ -37,7 +39,7 @@ public class JpegEventSupport extends LoggableObject implements JpegListener {
 	 * @param listener
 	 *            The listener that is added.
 	 */
-	public void addJpegListener(JpegListener listener) {
+	public void addJpegListener(ImageListener listener) {
 		String mn = debugEntering("addJpegListener", "listener: ", listener);
 		if (listener == null) {
 			warn(mn, "Listener reference null is ignored.");
@@ -55,7 +57,7 @@ public class JpegEventSupport extends LoggableObject implements JpegListener {
 	 * @param listener
 	 *            The listener that is removed.
 	 */
-	public void removeJpegListener(JpegListener listener) {
+	public void removeJpegListener(ImageListener listener) {
 		String mn = debugEntering("removeJpegListener", "listener: ", listener);
 		if (listener == null) {
 			warn(mn, "Listener reference null is ignored.");
@@ -75,8 +77,8 @@ public class JpegEventSupport extends LoggableObject implements JpegListener {
 	 *            The event that shall be distributed.
 	 */
 	@Override
-	public void newImage(JpegEvent event) {
-		for (JpegListener listener : listeners) {
+	public void newImage(ImageEvent event) {
+		for (ImageListener listener : listeners) {
 			listener.newImage(event);
 		}
 	}
@@ -88,7 +90,7 @@ public class JpegEventSupport extends LoggableObject implements JpegListener {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("JpegEventSupport[listeners:");
+		StringBuilder sb = new StringBuilder("ImageEventSupport[listeners:");
 		sb.append(listeners.size());
 		sb.append("]");
 		return sb.toString();

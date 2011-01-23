@@ -6,7 +6,7 @@ import java.io.LineNumberReader;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import mjpegslicer.LoggableObject;
+import mjpegslicer.util.LoggableObject;
 
 public class Handler extends LoggableObject {
 	private Feeder feeder;

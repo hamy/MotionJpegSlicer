@@ -1,4 +1,4 @@
-package mjpegslicer;
+package mjpegslicer.util;
 
 import java.util.StringTokenizer;
 

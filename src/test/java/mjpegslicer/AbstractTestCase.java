@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import java.io.InputStream;
 import java.util.StringTokenizer;
 
+import mjpegslicer.util.LoggableObject;
+
 /**
  * The base class for the test cases of this project.
  */

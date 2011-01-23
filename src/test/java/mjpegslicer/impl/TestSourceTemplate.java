@@ -1,6 +1,6 @@
-package mjpegslicer.source;
+package mjpegslicer.impl;
 
-import static mjpegslicer.source.AssertSource.assertSource;
+import static mjpegslicer.AssertSource.assertSource;
 import static org.junit.Assert.fail;
 
 import org.junit.After;
@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import mjpegslicer.AbstractTestCase;
+import mjpegslicer.Source;
+import mjpegslicer.impl.SourceTemplate;
 import mjpegslicer.mockcam.Camera;
 import mjpegslicer.mockcam.DefaultFeederFactory;
 

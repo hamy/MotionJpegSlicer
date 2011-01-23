@@ -2,8 +2,8 @@ package mjpegslicer.mockcam;
 
 import java.io.IOException;
 
-import mjpegslicer.LoggableObject;
-import mjpegslicer.Validator;
+import mjpegslicer.util.LoggableObject;
+import mjpegslicer.util.Validator;
 
 public class Camera extends LoggableObject {
 

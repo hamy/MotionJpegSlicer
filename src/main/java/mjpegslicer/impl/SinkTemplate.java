@@ -1,4 +1,4 @@
-package mjpegslicer.sink;
+package mjpegslicer.impl;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -14,8 +14,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import mjpegslicer.ImageDataCorruptionException;
-import mjpegslicer.LoggableObject;
-import mjpegslicer.Validator;
+import mjpegslicer.Sink;
+import mjpegslicer.util.LoggableObject;
+import mjpegslicer.util.Validator;
 
 public class SinkTemplate extends LoggableObject implements Sink {
 

@@ -1,4 +1,4 @@
-package mjpegslicer;
+package mjpegslicer.util;
 
 /**
  * A helper class that provides several static validation methods.

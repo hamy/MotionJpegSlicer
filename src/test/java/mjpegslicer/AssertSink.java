@@ -1,7 +1,8 @@
-package mjpegslicer.sink;
+package mjpegslicer;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import mjpegslicer.Sink;
 
 public class AssertSink {
 

@@ -1,10 +1,10 @@
-package mjpegslicer.event;
+package mjpegslicer;
 
 /**
  * Clients that want to be notified when a JPEG image was sliced from the camera
  * M-JPEG stream must implement this interface.
  */
-public interface JpegListener {
+public interface ImageListener {
 
 	/**
 	 * Notification method.
@@ -12,5 +12,5 @@ public interface JpegListener {
 	 * @param event
 	 *            The event that describes the JPEG image.
 	 */
-	public void newImage(JpegEvent event);
+	public void newImage(ImageEvent event);
 }

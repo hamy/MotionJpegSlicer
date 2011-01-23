@@ -1,4 +1,4 @@
-package mjpegslicer.source;
+package mjpegslicer.impl;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -9,8 +9,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
 
-import mjpegslicer.LoggableObject;
-import mjpegslicer.Validator;
+import mjpegslicer.Source;
+import mjpegslicer.util.LoggableObject;
+import mjpegslicer.util.Validator;
 
 import sun.misc.BASE64Encoder;
 

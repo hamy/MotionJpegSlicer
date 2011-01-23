@@ -1,6 +1,6 @@
 package mjpegslicer.mockcam;
 
-import mjpegslicer.LoggableObject;
+import mjpegslicer.util.LoggableObject;
 
 public class FeederRunner extends LoggableObject implements Runnable {
 	private FeederTemplate feeder;

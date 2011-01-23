@@ -1,20 +1,22 @@
-package mjpegslicer.event;
+package mjpegslicer;
 
 import java.util.Date;
+
+import mjpegslicer.ImageEvent;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertEquals;
 
-public class AssertEvent {
+public class AssertImageEvent {
 
 	// prevent instantiation
-	private AssertEvent() {
+	private AssertImageEvent() {
 	}
 
-	public static void assertJpegEvent(Object expectedSource,
+	public static void assertImageEvent(Object expectedSource,
 			long expectedCreationMillis, int expectedSequenceNumber,
-			byte[] expectedImageData, JpegEvent actual) {
+			byte[] expectedImageData, ImageEvent actual) {
 		assertNotNull("actual event reference must not be null.", actual);
 		assertNotNull("expected source reference must not be null.",
 				expectedSource);

@@ -1,6 +1,6 @@
 package mjpegslicer.mockcam;
 
-import mjpegslicer.LoggableObject;
+import mjpegslicer.util.LoggableObject;
 
 public class DefaultFeederFactory extends LoggableObject implements
 		FeederFactory {

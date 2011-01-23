@@ -1,6 +1,9 @@
-package mjpegslicer;
+package mjpegslicer.util;
 
 import static org.junit.Assert.assertEquals;
+
+import mjpegslicer.AbstractTestCase;
+import mjpegslicer.util.Validator;
 
 import org.junit.Test;
 

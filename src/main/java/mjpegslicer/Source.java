@@ -1,4 +1,4 @@
-package mjpegslicer.source;
+package mjpegslicer;
 
 import java.io.InputStream;
 

@@ -1,5 +1,8 @@
 package mjpegslicer.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mjpegslicer.HttpHeaders;
 import mjpegslicer.util.LoggableObject;
 import mjpegslicer.util.Validator;
@@ -16,7 +19,7 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 		return keys.length;
 	}
 
-	private String[] keys;
+	private final String[] keys;
 
 	/**
 	 * Returns the i-th key.
@@ -32,7 +35,7 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 		return keys[i];
 	}
 
-	private String[] values;
+	private final String[] values;
 
 	/**
 	 * Returns the i-th value.
@@ -48,7 +51,7 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 		return values[i];
 	}
 
-	private int contentLength = INVALID_CONTENT_LENGTH;
+	private final int contentLength;
 
 	/**
 	 * Indicates whether this container contains a "Content-Length" header
@@ -77,7 +80,7 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 		return contentLength;
 	}
 
-	private String contentType = null;
+	private final String contentType;
 
 	/**
 	 * Indicates whether this container contains a "Content-Type" header entry.
@@ -99,7 +102,7 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 		return contentType;
 	}
 
-	private String boundary = null;
+	private final String boundary;
 
 	/**
 	 * Indicates whether this container contains a boundary token in a
@@ -122,5 +125,75 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 		return boundary;
 	}
 
-	// TBD: add builder class (see Bloch)
+	public static class Builder extends LoggableObject {
+		private List<String> keys = new ArrayList<String>();
+		private List<String> values = new ArrayList<String>();
+		private String lastKey;
+		private String lastValue;
+		private String contentType = null;
+		private int contentLength = INVALID_CONTENT_LENGTH;
+		private String boundary = null;
+
+		private void contentTypeLookUp() {
+			String mn = debugEntering("contentTypeLookUp");
+			if (lastKey.equalsIgnoreCase("Content-Type")) {
+				contentType = lastValue;
+				debug(mn, "found content type: ", contentType);
+			}
+			debugLeaving(mn);
+		}
+
+		private void contentLengthLookUp() {
+			String mn = debugEntering("contentLengthLookUp");
+			if (lastKey.equalsIgnoreCase("Content-Length")) {
+				contentLength = Integer.parseInt(lastValue);
+				debug(mn, "found content length: ", contentLength);
+			}
+			debugLeaving(mn);
+		}
+
+		public Builder addHeader(String line) {
+			String mn = debugEntering("addHeader", "line: ", line);
+			Validator.argumentMustNotBeNull("addHeader", "line", line);
+			int colonPos = line.indexOf(':');
+			if (colonPos < 0) {
+				lastKey = line;
+				lastValue = "";
+			} else {
+				lastKey = line.substring(0, colonPos);
+				if (colonPos == line.length() - 1) {
+					lastValue = "";
+				} else {
+					lastValue = line.substring(colonPos + 1);
+				}
+			}
+			keys.add(lastKey);
+			values.add(lastValue);
+			debug(mn, "key=", lastKey, ", value=", lastValue);
+			contentTypeLookUp();
+			contentLengthLookUp();
+			debugLeaving(mn);
+			return this;
+		}
+
+		public HttpHeaders build() {
+			String mn = debugEntering("build");
+			HttpHeaders result = new HttpHeadersImpl(this);
+			debugLeaving(mn);
+			return result;
+		}
+	}
+
+	private static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+	private HttpHeadersImpl(Builder builder) {
+		String mn = debugEntering(MN_INIT);
+		keys = builder.keys.toArray(EMPTY_STRING_ARRAY);
+		values = builder.values.toArray(EMPTY_STRING_ARRAY);
+		contentType = builder.contentType;
+		contentLength = builder.contentLength;
+		boundary = builder.boundary;
+		debugLeaving(mn);
+	}
+
 }

@@ -89,7 +89,7 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 	 */
 	@Override
 	public boolean hasContentType() {
-		return contentType == null;
+		return contentType != null;
 	}
 
 	/**
@@ -102,6 +102,7 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 		return contentType;
 	}
 
+	private final String boundaryLookUpString;
 	private final String boundary;
 
 	/**
@@ -112,7 +113,7 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 	 */
 	@Override
 	public boolean hasBoundary() {
-		return boundary == null;
+		return boundary != null;
 	}
 
 	/**
@@ -133,6 +134,25 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 		private String contentType = null;
 		private int contentLength = INVALID_CONTENT_LENGTH;
 		private String boundary = null;
+		private final String boundaryLookUpString;
+
+		public Builder(String boundaryLookUpString) {
+			debugEntering(MN_INIT);
+			this.boundaryLookUpString = boundaryLookUpString;
+			debug(MN_INIT, "boundary look-up string: ", boundaryLookUpString);
+			debugLeaving(MN_INIT);
+		}
+
+		private void boundaryLookUp() {
+			String mn = debugEntering("boundaryLookUp");
+			if (boundaryLookUpString != null) {
+				if (lastKey.equals(boundaryLookUpString)) {
+					boundary = lastKey;
+					debug(mn, "found boundary: ", boundary);
+				}
+			}
+			debugLeaving(mn);
+		}
 
 		private void contentTypeLookUp() {
 			String mn = debugEntering("contentTypeLookUp");
@@ -166,19 +186,21 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 				} else {
 					lastValue = line.substring(colonPos + 1);
 				}
+				lastValue = lastValue.trim();
 			}
 			keys.add(lastKey);
 			values.add(lastValue);
 			debug(mn, "key=", lastKey, ", value=", lastValue);
 			contentTypeLookUp();
 			contentLengthLookUp();
+			boundaryLookUp();
 			debugLeaving(mn);
 			return this;
 		}
 
-		public HttpHeaders build() {
+		public HttpHeadersImpl build() {
 			String mn = debugEntering("build");
-			HttpHeaders result = new HttpHeadersImpl(this);
+			HttpHeadersImpl result = new HttpHeadersImpl(this);
 			debugLeaving(mn);
 			return result;
 		}
@@ -192,6 +214,7 @@ public class HttpHeadersImpl extends LoggableObject implements HttpHeaders {
 		values = builder.values.toArray(EMPTY_STRING_ARRAY);
 		contentType = builder.contentType;
 		contentLength = builder.contentLength;
+		boundaryLookUpString = builder.boundaryLookUpString;
 		boundary = builder.boundary;
 		debugLeaving(mn);
 	}
